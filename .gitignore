@@ -1,0 +1,6 @@
+*.html
+*.csv
+*.png
+data/
+credentials.py
+__pycache__

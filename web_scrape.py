@@ -1,5 +1,9 @@
+# -*- coding: utf-8 -*-
 #!/usr/bin/env python4
-# coding: utf-8
+
+# no display for matplotlib
+import matplotlib as mpl
+mpl.use('Agg')
 
 import requests
 from datetime import datetime
@@ -14,7 +18,7 @@ import sys
 # input is Almoço or Jantar
 meal = sys.argv[1]
 
-if meal != "Almoço" and meal != "Jantar":
+if meal != "Almoco" and meal != "Jantar":
     print("Meal input is invalid")
     exit(-1)
 
@@ -23,22 +27,27 @@ dia = ('Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-f
 mes = ('Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro')
 now=datetime.now()
 title = "{0:s}_{1:d}_{2:s}_{3:d}_{4:s}".format(now.strftime("%a"), now.day,now.strftime("%B"), now.year, meal[:3])
-human_title = "{:s}, {:d} de {:s} de {:d}, {:s}".format(dia[now.weekday()], now.day,mes[now.month-1], now.year, meal)
+#human_title = u"{:s}, {:d} de {:s} de {:d}, {:s}".format(dia[now.weekday()], now.day,mes[now.month-1], now.year, meal)
+human_title = "{:d} de {:s} de {:d}, {:s}".format( now.day,mes[now.month-1], now.year, meal)
 
-if meal=="Almoço":
+if meal=="Almoco":
     num_hours = 5
     lag = 10
     meal_times = range(10,15)
     # 5*3600 s + 2 min (120 s)
-    secs = 18120
+    #secs = 18120
+    secs = 3600 # only one hour
+    label = "Horario do Almoco"
 elif meal=="Jantar":
     num_hours = 4
     lag = 17
     meal_times = range(17,21)
     # 4*3600 s + 2 min (120 s)
-    secs = 14520
+    label = "Horario do Jantar"
+    #secs = 14520
+    secs = 3600 # only one hour
 
-#secs = 20 # short test
+#secs = 60 # short test
 samples = int(secs/freq)            # real case
 #samples = 12                         # test case
 times = []
@@ -75,9 +84,9 @@ sns.set_context("notebook", font_scale=1.2, rc={"lines.linewidth": 2.5})
 
 p1 = sns.heatmap(df.dropna(axis=1),vmin=0,vmax=300,cmap=sns.color_palette("RdBu_r",n_colors=100))
 #p1 = sns.heatmap(df.dropna(axis=1),cmap=sns.color_palette("RdBu_r",n_colors=100))
-p1.set(xlabel='Horário de agendamento',ylabel='Horário do '+meal)
+p1.set(xlabel="Horario de agendamento",ylabel=label)
 p1.set_title(human_title)
 #plt.show()
 fig = p1.get_figure()
 fig.tight_layout()
-fig.savefig(title+".png")
+fig.savefig("data/"+title+".png")

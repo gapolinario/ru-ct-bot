@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import tweepy
 from datetime import datetime
 import sys
@@ -19,4 +21,4 @@ meal = sys.argv[1]
 now=datetime.now()
 title = "{0:s}_{1:d}_{2:s}_{3:d}_{4:s}".format(now.strftime("%a"), now.day,now.strftime("%B"), now.year, meal[:3])
 
-api.update_with_media(title+'.png')
+api.update_with_media("data/"+title+'.png')
