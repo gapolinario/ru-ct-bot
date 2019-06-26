@@ -2,5 +2,5 @@
 *.csv
 *.png
 data/
-credentials.py
+credentials.py*
 __pycache__
