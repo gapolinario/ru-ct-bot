@@ -78,7 +78,7 @@ for k in range(samples):
 
 df = pd.DataFrame(full_vacancies,columns=times,index=meal_times)
 
-df.to_csv(title+'.csv')
+df.to_csv("data/"+title+".csv")
 
 sns.set_context("notebook", font_scale=1.2, rc={"lines.linewidth": 2.5})
 
