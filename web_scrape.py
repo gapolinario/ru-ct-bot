@@ -35,8 +35,8 @@ if meal=="Almoco":
     lag = 10
     meal_times = range(10,15)
     # 5*3600 s + 2 min (120 s)
-    #secs = 18120
-    secs = 3600 # only one hour
+    #secs = 18120 # 5 hours
+    secs = 3720 # two hours, 2 min
     label = "Horario do Almoco"
 elif meal=="Jantar":
     num_hours = 4
@@ -44,8 +44,8 @@ elif meal=="Jantar":
     meal_times = range(17,21)
     # 4*3600 s + 2 min (120 s)
     label = "Horario do Jantar"
-    #secs = 14520
-    secs = 3600 # only one hour
+    #secs = 14520 # 4 hours
+    secs = 3720 # one hour + 2 min
 
 #secs = 60 # short test
 samples = int(secs/freq)            # real case
